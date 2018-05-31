@@ -12,6 +12,7 @@ def loadDataset(filename, split, trainingSet=[], testSet=[]):
         dataset = list(lines)
         for x in range(len(dataset) - 1):
             for y in range(4):#deixar como float os valores do data set para poder calcula-los
+
                 dataset[x][y] = float(dataset[x][y])
             if random.random() < split:
                 trainingSet.append(dataset[x])
@@ -99,7 +100,27 @@ def getNeighborsWithRadius(trainingSet, testInstance, k, radius):#classe para pe
     for x in range(k):
         neighbors.append(distances[x][0])
     return neighbors
+#distance weighted k-NN
 
+def getResponseWithWeight(neighbors, testInstance):
+    classVotes = {}
+    weights = []
+    length = len(testInstance) - 1
+    for x in range(len(neighbors)):
+        dist = euclideanDistance(testInstance, neighbors[x], length)
+        print dist
+        if pow(dist, 2.0) != 0.0:
+            weights.append(float(1.0/pow(dist, 2.0)))
+        else:
+            weights.append(float(1.0))
+    for x in range(len(neighbors)):
+        response = neighbors[x][-1]
+        if response in classVotes:
+            classVotes[response] += weights[x]
+        else:
+            classVotes[response] = weights[x]
+    sortedVotes = sorted(classVotes.iteritems(), key=operator.itemgetter(1), reverse=True)
+    return sortedVotes[0][0]
 #kDN
 def getkDN(trainingSet, trainingInstance, k):
     distances = []
@@ -120,7 +141,7 @@ def getkDN(trainingSet, trainingInstance, k):
 
 
 
-def kNN_and_aNN():
+def etcNN():
 
     # prepare data
     trainingSet = []
@@ -129,10 +150,10 @@ def kNN_and_aNN():
     loadDataset('iris.csv', split, trainingSet, testSet)
     print 'Train set: ' + repr(len(trainingSet))
     print 'Test set: ' + repr(len(testSet))
-    print 'aNN'
+    print 'kNN'
     # generate predictions
     predictions = []
-    k = 4
+    k = 6
     for x in range(len(testSet)):
         neighbors = getNeighbors(trainingSet, testSet[x], k)
         result = getResponse(neighbors)
@@ -157,12 +178,23 @@ def kNN_and_aNN():
     accuracy = getAccuracy(testSet, predictions)
     print('Accuracy aNN: ' + repr(accuracy) + '%')
     accuracyANN = repr(accuracy)
-    print 'kNN accuracy: ' + accuracyKNN + ' aNN accuracy: ' + accuracyANN
 
+
+    #w-NN
+    print 'w-NN'
+    for x in range(len(testSet)):
+        neighbors = getNeighbors(trainingSet, testSet[x], k)
+        result = getResponseWithWeight(neighbors, testSet[x])
+        predictions.append(result)
+        print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
+    accuracy = getAccuracy(testSet, predictions)
+    accuracyWNN = repr(accuracy)
+    print 'kNN accuracy: ' + accuracyKNN + '%' + ' aNN accuracy: ' + accuracyANN + '%' + ' wNN accuracy: ' + accuracyWNN + '%'
     #kDN
     averagekDN = 0.0;
     for x in range(len(trainingSet)):
         averagekDN = averagekDN + getkDN(trainingSet, trainingSet[x], k)#usando o mesmo k do kNN e aNN
     print "Average kDN: " + repr(float(float(averagekDN)/float(len(trainingSet))))
 
-kNN_and_aNN()
+
+etcNN()
