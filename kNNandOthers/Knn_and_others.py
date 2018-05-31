@@ -11,7 +11,7 @@ def loadDataset(filename, split, trainingSet=[], testSet=[]):
         lines = csv.reader(csvfile)
         dataset = list(lines)
         for x in range(len(dataset) - 1):
-            for y in range(4):#deixar como float os valores do data set para poder calcula-los
+            for y in range(11):#deixar como float os valores do data set para poder calcula-los
 
                 dataset[x][y] = float(dataset[x][y])
             if random.random() < split:
@@ -108,7 +108,6 @@ def getResponseWithWeight(neighbors, testInstance):
     length = len(testInstance) - 1
     for x in range(len(neighbors)):
         dist = euclideanDistance(testInstance, neighbors[x], length)
-        print dist
         if pow(dist, 2.0) != 0.0:
             weights.append(float(1.0/pow(dist, 2.0)))
         else:
@@ -147,7 +146,7 @@ def etcNN():
     trainingSet = []
     testSet = []
     split = 0.67
-    loadDataset('iris.csv', split, trainingSet, testSet)
+    loadDataset('redwine.csv', split, trainingSet, testSet)
     print 'Train set: ' + repr(len(trainingSet))
     print 'Test set: ' + repr(len(testSet))
     print 'kNN'
