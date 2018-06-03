@@ -4,14 +4,17 @@ import csv
 import random
 import math
 import operator
+import numpy as np
+import matplotlib.pyplot as plt
 
 
-def loadDataset(filename, split, trainingSet=[], testSet=[]):
+
+def loadDataset(filename, split, quantity, trainingSet=[], testSet=[]):
     with open(filename, 'rU') as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
         for x in range(len(dataset) - 1):
-            for y in range(11):#deixar como float os valores do data set para poder calcula-los
+            for y in range(quantity):#deixar como float os valores do data set para poder calcula-los
 
                 dataset[x][y] = float(dataset[x][y])
             if random.random() < split:
@@ -140,13 +143,13 @@ def getkDN(trainingSet, trainingInstance, k):
 
 
 
-def etcNN():
+def etcNN(split, filename, quantity):
 
     # prepare data
     trainingSet = []
     testSet = []
-    split = 0.67
-    loadDataset('redwine.csv', split, trainingSet, testSet)
+    #split = 0.67
+    loadDataset(filename, split, quantity, trainingSet, testSet)
     print 'Train set: ' + repr(len(trainingSet))
     print 'Test set: ' + repr(len(testSet))
     print 'kNN'
@@ -157,7 +160,7 @@ def etcNN():
         neighbors = getNeighbors(trainingSet, testSet[x], k)
         result = getResponse(neighbors)
         predictions.append(result)
-        print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
+       # print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
     accuracy = getAccuracy(testSet, predictions)
     print('Accuracy kNN: ' + repr(accuracy) + '%')
     accuracyKNN = repr(accuracy)
@@ -173,7 +176,7 @@ def etcNN():
         neighbors = getNeighborsWithRadius(trainingSet, testSet[x], k, radiusOfTrainingSet)
         result = getResponse(neighbors)
         predictions.append(result)
-        print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
+       # print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
     accuracy = getAccuracy(testSet, predictions)
     print('Accuracy aNN: ' + repr(accuracy) + '%')
     accuracyANN = repr(accuracy)
@@ -181,11 +184,12 @@ def etcNN():
 
     #w-NN
     print 'w-NN'
+    predictions = []
     for x in range(len(testSet)):
         neighbors = getNeighbors(trainingSet, testSet[x], k)
         result = getResponseWithWeight(neighbors, testSet[x])
         predictions.append(result)
-        print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
+        #print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
     accuracy = getAccuracy(testSet, predictions)
     accuracyWNN = repr(accuracy)
     print 'kNN accuracy: ' + accuracyKNN + '%' + ' aNN accuracy: ' + accuracyANN + '%' + ' wNN accuracy: ' + accuracyWNN + '%'
@@ -194,6 +198,7 @@ def etcNN():
     for x in range(len(trainingSet)):
         averagekDN = averagekDN + getkDN(trainingSet, trainingSet[x], k)#usando o mesmo k do kNN e aNN
     print "Average kDN: " + repr(float(float(averagekDN)/float(len(trainingSet))))
+    retorno = [accuracyKNN]
 
 
-etcNN()
+etcNN(0.67, 'redwine.csv', 11)
