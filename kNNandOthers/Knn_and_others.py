@@ -143,7 +143,7 @@ def getkDN(trainingSet, trainingInstance, k):
 
 
 
-def etcNN(split, filename, quantity):
+def etcNN(split, filename, quantity, k):
 
     # prepare data
     trainingSet = []
@@ -155,7 +155,7 @@ def etcNN(split, filename, quantity):
     print 'kNN'
     # generate predictions
     predictions = []
-    k = 6
+
     for x in range(len(testSet)):
         neighbors = getNeighbors(trainingSet, testSet[x], k)
         result = getResponse(neighbors)
@@ -164,6 +164,7 @@ def etcNN(split, filename, quantity):
     accuracy = getAccuracy(testSet, predictions)
     print('Accuracy kNN: ' + repr(accuracy) + '%')
     accuracyKNN = repr(accuracy)
+    accuracyKNNNumber = accuracy
 
     print 'aNN'
     radiusOfTrainingSet = []
@@ -180,6 +181,7 @@ def etcNN(split, filename, quantity):
     accuracy = getAccuracy(testSet, predictions)
     print('Accuracy aNN: ' + repr(accuracy) + '%')
     accuracyANN = repr(accuracy)
+    accuracyANNNumber = accuracy
 
 
     #w-NN
@@ -192,13 +194,38 @@ def etcNN(split, filename, quantity):
         #print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
     accuracy = getAccuracy(testSet, predictions)
     accuracyWNN = repr(accuracy)
+    accuracyWNNNumber = accuracy
     print 'kNN accuracy: ' + accuracyKNN + '%' + ' aNN accuracy: ' + accuracyANN + '%' + ' wNN accuracy: ' + accuracyWNN + '%'
     #kDN
     averagekDN = 0.0;
     for x in range(len(trainingSet)):
         averagekDN = averagekDN + getkDN(trainingSet, trainingSet[x], k)#usando o mesmo k do kNN e aNN
-    print "Average kDN: " + repr(float(float(averagekDN)/float(len(trainingSet))))
-    retorno = [accuracyKNN]
+    finalKDN = repr(float(float(averagekDN)/float(len(trainingSet))))
+    finalKDNNumber = float(float(averagekDN)/float(len(trainingSet)))
+    print "Average kDN: " + finalKDN
+    retorno = [accuracyKNNNumber, accuracyANNNumber, accuracyWNNNumber, finalKDNNumber]
+    return retorno
 
 
-etcNN(0.67, 'redwine.csv', 11)
+def main():
+    count = 0
+    accuracyKNN = []
+    accuracyANN = []
+    accuracyWNN = []
+    kDN = []
+    while True:
+        count = count + 0.05
+        if count >= 0.99:
+            break
+        retorno = etcNN(count, 'redwine.csv', 11, 7)
+        accuracyKNN.append(retorno[0])
+        accuracyANN.append(retorno[1])
+        accuracyWNN.append(retorno[2])
+        kDN.append(retorno[3])
+    print kDN
+    print accuracyKNN
+    plt.plot(kDN, accuracyKNN, 'r.')
+    plt.axis([0, 1, 0, 100])
+    plt.show()
+
+main()
