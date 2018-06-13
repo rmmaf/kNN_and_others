@@ -74,7 +74,7 @@ def getAccuracy(testSet, predictions):
 
 #implementacao do a-NN
 def getSphereRadius(trainingSet, trainingInstance, e):#classe para pegar o raio da instancia do conjunto de treino
-    radius = 0
+    radius = 1
     distances = []
     length = len(trainingInstance) - 1
     for x in range(len(trainingSet)):
@@ -96,6 +96,8 @@ def getNeighborsWithRadius(trainingSet, testInstance, k, radius):#classe para pe
     distances = []
     length = len(testInstance) - 1
     for x in range(len(trainingSet)):
+        if(radius[x] == 0):
+            radius[x] = 1
         dist = (euclideanDistance(testInstance, trainingSet[x], length) / radius[x])
         distances.append((trainingSet[x], dist))
     distances.sort(key=operator.itemgetter(1))
@@ -124,14 +126,14 @@ def getResponseWithWeight(neighbors, testInstance):
     sortedVotes = sorted(classVotes.iteritems(), key=operator.itemgetter(1), reverse=True)
     return sortedVotes[0][0]
 #kDN
-def getkDN(trainingSet, trainingInstance, k):
+def getkDN(trainingSet, testInstance, k):
     distances = []
-    length = len(trainingInstance) - 1
+    length = len(testInstance) - 1
     for x in range(len(trainingSet)):
-        dist = euclideanDistance(trainingInstance, trainingSet[x], length)
+        dist = euclideanDistance(testInstance, trainingSet[x], length)
         distances.append((trainingSet[x], dist))
     distances.sort(key=operator.itemgetter(1))
-    classInstance = trainingInstance[len(trainingInstance) - 1]  # pega a classe da instancia atual
+    classInstance = testInstance[len(testInstance) - 1]  # pega a classe da instancia atual
     count = 0
     for x in range(k):
         f = operator.itemgetter(0)
@@ -142,6 +144,118 @@ def getkDN(trainingSet, trainingInstance, k):
     return float(float(count)/float(k))
 
 
+def newEtcNN(split, filename, quantity, k):
+    # prepare data
+    trainingSet = []
+    testSet = []
+    # split = 0.67
+    loadDataset(filename, split, quantity, trainingSet, testSet)
+    print 'Training set: ' + repr(len(trainingSet))
+    print 'Test set: ' + repr(len(testSet))
+    #calculo KDN
+    testSetKDN = []
+    for x in range (len(testSet)):
+        testSetKDN.append(getkDN(trainingSet, testSet[x], k))
+    print 'kNN'
+    # generate predictions
+    predictions = []
+    acertosKnn = []
+    for x in range(len(testSet)):
+        neighbors = getNeighbors(trainingSet, testSet[x], k)
+        result = getResponse(neighbors)
+        predictions.append(result)
+        if result == testSet[x][-1]:
+            acertosKnn.append(True)
+        else:
+            acertosKnn.append(False)
+    accuracy = getAccuracy(testSet, predictions)
+    print('Accuracy kNN: ' + repr(accuracy) + '%')
+    accuracyKNN = repr(accuracy)
+    accuracyKNNNumber = accuracy
+
+    print 'aNN'
+    radiusOfTrainingSet = []
+    for x in range(len(trainingSet)):
+        radius = getSphereRadius(trainingSet, trainingSet[x], 0.0)
+        radiusOfTrainingSet.append(radius)
+    predictions = []
+    acertosAnn = []
+    for x in range(len(testSet)):
+        neighbors = getNeighborsWithRadius(trainingSet, testSet[x], k, radiusOfTrainingSet)
+        result = getResponse(neighbors)
+        predictions.append(result)
+        if result == testSet[x][-1]:
+            acertosAnn.append(True)
+        else:
+            acertosAnn.append(False)
+    accuracy = getAccuracy(testSet, predictions)
+    print('Accuracy aNN: ' + repr(accuracy) + '%')
+    accuracyANN = repr(accuracy)
+    accuracyANNNumber = accuracy
+
+    # w-NN
+    print 'w-NN'
+    predictions = []
+    acertosWnn = []
+    for x in range(len(testSet)):
+        neighbors = getNeighbors(trainingSet, testSet[x], k)
+        result = getResponseWithWeight(neighbors, testSet[x])
+        predictions.append(result)
+        if result == testSet[x][-1]:
+            acertosWnn.append(True)
+        else:
+            acertosWnn.append(False)
+    accuracy = getAccuracy(testSet, predictions)
+    accuracyWNN = repr(accuracy)
+    accuracyWNNNumber = accuracy
+    print('Accuracy WNN: ' + repr(accuracy) + '%')
+
+    fatorSoma = float(1.0/7.0)
+    count = float(0.0)
+    eixoYK = []
+    eixoYW = []
+    eixoYA = []
+    eixoX = []
+    while count < 1.0:
+        acertosK = 0.0
+        acertosW = 0.0
+        acertosA = 0.0
+        contagem = 0.0
+        for x in range(len(testSetKDN)):
+            if(count <= testSetKDN[x] < (count + fatorSoma)):
+                if(acertosKnn[x]):
+                    acertosK = acertosK + 1.0
+                if(acertosWnn[x]):
+                    acertosW = acertosW + 1.0
+                if(acertosAnn[x]):
+                    acertosA = acertosA + 1.0
+                contagem = contagem + 1.0
+        if contagem == 0.0:
+            contagem = 1.0
+        eixoX.append(float((count*2.0 + fatorSoma)/2.0))#pegar o ponto medio do intervalo
+        eixoYK.append(float(acertosK/contagem) * 100.0)
+        eixoYW.append(float(acertosW / contagem) * 100.0)
+        eixoYA.append(float(acertosA / contagem) * 100.0)
+        count = count + fatorSoma
+    #plt.plot(eixoX, eixoYK, 'r--', eixoX, eixoYW, 'b--', eixoX, eixoYA, 'g--')
+
+    plt.figure(1)  # the first figure
+    plt.plot(eixoX, eixoYK, 'rs')
+    plt.ylabel('Precisao Knn')
+    plt.xlabel('KDN')
+
+    plt.figure(2)  # the first figure
+    plt.plot(eixoX, eixoYA, 'bs')
+    plt.ylabel('Precisao Ann')
+    plt.xlabel('KDN')
+
+    plt.figure(3)  # the first figure
+    plt.plot(eixoX, eixoYW, 'gs')
+    plt.ylabel('Precisao Wnn')
+    plt.xlabel('KDN')
+    plt.show()
+
+newEtcNN(0.8, 'whiteWine.csv', 11, 7)
 
 def etcNN(split, filename, quantity, k):
 
@@ -205,27 +319,3 @@ def etcNN(split, filename, quantity, k):
     print "Average kDN: " + finalKDN
     retorno = [accuracyKNNNumber, accuracyANNNumber, accuracyWNNNumber, finalKDNNumber]
     return retorno
-
-
-def main():
-    count = 0
-    accuracyKNN = []
-    accuracyANN = []
-    accuracyWNN = []
-    kDN = []
-    while True:
-        count = count + 0.05
-        if count >= 0.99:
-            break
-        retorno = etcNN(count, 'redwine.csv', 11, 7)
-        accuracyKNN.append(retorno[0])
-        accuracyANN.append(retorno[1])
-        accuracyWNN.append(retorno[2])
-        kDN.append(retorno[3])
-    print kDN
-    print accuracyKNN
-    plt.plot(kDN, accuracyKNN, 'r.')
-    plt.axis([0, 1, 0, 100])
-    plt.show()
-
-main()
