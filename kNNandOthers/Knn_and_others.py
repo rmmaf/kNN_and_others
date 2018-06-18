@@ -15,7 +15,6 @@ def loadDataset(filename, split, quantity, trainingSet=[], testSet=[]):
         dataset = list(lines)
         for x in range(len(dataset) - 1):
             for y in range(quantity):#deixar como float os valores do data set para poder calcula-los
-
                 dataset[x][y] = float(dataset[x][y])
             if random.random() < split:
                 trainingSet.append(dataset[x])
@@ -239,83 +238,117 @@ def newEtcNN(split, filename, quantity, k):
         count = count + fatorSoma
     #plt.plot(eixoX, eixoYK, 'r--', eixoX, eixoYW, 'b--', eixoX, eixoYA, 'g--')
 
-    plt.figure(1)  # the first figure
-    plt.plot(eixoX, eixoYK, 'rs')
-    plt.ylabel('Precisao Knn')
-    plt.xlabel('KDN')
+    return eixoX, eixoYA, eixoYK, eixoYW
 
-    plt.figure(2)  # the first figure
-    plt.plot(eixoX, eixoYA, 'bs')
-    plt.ylabel('Precisao Ann')
-    plt.xlabel('KDN')
+def listSum(list1, list2):
+    if len(list1) == len(list2):
+        listAux = []
+        for x in range(len(list1)):
+            listAux.append(list1[x] + list2[x])
+        return listAux
+    else:
+        return 0
 
-    plt.figure(3)  # the first figure
-    plt.plot(eixoX, eixoYW, 'gs')
-    plt.ylabel('Precisao Wnn')
-    plt.xlabel('KDN')
+def divideList (list, factor):
+    for x in range(len(list)):
+        list[x] = list[x]/factor
+
+def repeat (eixoX, eixoYA, eixoYK, eixoYW, count, plus, fator, nome, att, k):
+    g0 = operator.itemgetter(0)
+    g1 = operator.itemgetter(1)
+    g2 = operator.itemgetter(2)
+    g3 = operator.itemgetter(3)
+    for x in range(count):
+        result = newEtcNN(fator, nome, att, k)
+        print result
+        if not eixoX:
+            eixoX = g0(result)
+            eixoYA = g1(result)
+            eixoYK = g2(result)
+            eixoYW = g3(result)
+        else:
+            eixoX = listSum(eixoX, g0(result))
+            eixoYA = listSum(eixoYA, g1(result))
+            eixoYK = listSum(eixoYK, g2(result))
+            eixoYW = listSum(eixoYW, g3(result))
+    divideList(eixoX, float(count + plus))
+    divideList(eixoYA, float(count + plus))
+    divideList(eixoYK, float(count + plus))
+    divideList(eixoYW, float(count + plus))
+    return eixoX, eixoYA, eixoYK, eixoYW
+
+
+def main():
+    eixoX = []
+    eixoYA = []
+    eixoYK = []
+    eixoYW = []
+    g0 = operator.itemgetter(0)
+    g1 = operator.itemgetter(1)
+    g2 = operator.itemgetter(2)
+    g3 = operator.itemgetter(3)
+
+    count = 10
+
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 0, 0.67, "cell.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell1.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell2.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell3.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell4.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell5.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell6.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell7.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell8.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 1, 0.67, "cell9.csv", 2, 7)
+    eixoX = g0(result)
+    eixoYA = g1(result)
+    eixoYK = g2(result)
+    eixoYW = g3(result)
+
+    plt.plot(eixoX, eixoYA, 'r--', eixoX, eixoYK, 'b:', eixoX, eixoYW, 'g-.')
+    plt.axis([0.00, 1.00, 0.00, 100.00])
     plt.show()
 
-newEtcNN(0.8, 'whiteWine.csv', 11, 7)
-
-def etcNN(split, filename, quantity, k):
-
-    # prepare data
-    trainingSet = []
-    testSet = []
-    #split = 0.67
-    loadDataset(filename, split, quantity, trainingSet, testSet)
-    print 'Train set: ' + repr(len(trainingSet))
-    print 'Test set: ' + repr(len(testSet))
-    print 'kNN'
-    # generate predictions
-    predictions = []
-
-    for x in range(len(testSet)):
-        neighbors = getNeighbors(trainingSet, testSet[x], k)
-        result = getResponse(neighbors)
-        predictions.append(result)
-       # print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
-    accuracy = getAccuracy(testSet, predictions)
-    print('Accuracy kNN: ' + repr(accuracy) + '%')
-    accuracyKNN = repr(accuracy)
-    accuracyKNNNumber = accuracy
-
-    print 'aNN'
-    radiusOfTrainingSet = []
-    for x in range(len(trainingSet)):
-        radius = getSphereRadius(trainingSet, trainingSet[x], 0)
-        radiusOfTrainingSet.append(radius)
-    predictions = []
-
-    for x in range(len(testSet)):
-        neighbors = getNeighborsWithRadius(trainingSet, testSet[x], k, radiusOfTrainingSet)
-        result = getResponse(neighbors)
-        predictions.append(result)
-       # print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
-    accuracy = getAccuracy(testSet, predictions)
-    print('Accuracy aNN: ' + repr(accuracy) + '%')
-    accuracyANN = repr(accuracy)
-    accuracyANNNumber = accuracy
-
-
-    #w-NN
-    print 'w-NN'
-    predictions = []
-    for x in range(len(testSet)):
-        neighbors = getNeighbors(trainingSet, testSet[x], k)
-        result = getResponseWithWeight(neighbors, testSet[x])
-        predictions.append(result)
-        #print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
-    accuracy = getAccuracy(testSet, predictions)
-    accuracyWNN = repr(accuracy)
-    accuracyWNNNumber = accuracy
-    print 'kNN accuracy: ' + accuracyKNN + '%' + ' aNN accuracy: ' + accuracyANN + '%' + ' wNN accuracy: ' + accuracyWNN + '%'
-    #kDN
-    averagekDN = 0.0;
-    for x in range(len(trainingSet)):
-        averagekDN = averagekDN + getkDN(trainingSet, trainingSet[x], k)#usando o mesmo k do kNN e aNN
-    finalKDN = repr(float(float(averagekDN)/float(len(trainingSet))))
-    finalKDNNumber = float(float(averagekDN)/float(len(trainingSet)))
-    print "Average kDN: " + finalKDN
-    retorno = [accuracyKNNNumber, accuracyANNNumber, accuracyWNNNumber, finalKDNNumber]
-    return retorno
+main()
