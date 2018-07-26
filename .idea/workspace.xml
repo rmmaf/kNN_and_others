@@ -1,25 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2378925c-a1ed-444d-a18e-250fdc480c7f" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/kNNandOthers/Knn_and_othersV2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kNNandOthers/cell0.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kNNandOthers/plot.py" afterDir="false" />
+    <list default="true" id="2378925c-a1ed-444d-a18e-250fdc480c7f" name="Default" comment="[x]">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kNNandOthers/cell.csv" beforeDir="false" afterPath="$PROJECT_DIR$/kNNandOthers/cell.csv" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/kNN_and_others$Knn_and_others.coverage" NAME="Knn_and_others Coverage Results" MODIFIED="1530714825668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kNNandOthers" />
-    <SUITE FILE_PATH="coverage/kNN_and_others$adaptKnn.coverage" NAME="adaptKnn Coverage Results" MODIFIED="1527800835389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kNNandOthers" />
-    <SUITE FILE_PATH="coverage/kNN_and_others$Knn_and_othersV2.coverage" NAME="Knn_and_othersV2 Coverage Results" MODIFIED="1531787428981" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kNNandOthers" />
     <SUITE FILE_PATH="coverage/kNN_and_others$plot.coverage" NAME="plot Coverage Results" MODIFIED="1531791653872" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kNNandOthers" />
+    <SUITE FILE_PATH="coverage/kNN_and_others$Knn_and_othersV2.coverage" NAME="Knn_and_othersV2 Coverage Results" MODIFIED="1532572889918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kNNandOthers" />
+    <SUITE FILE_PATH="coverage/kNN_and_others$tests.coverage" NAME="tests Coverage Results" MODIFIED="1532564178154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kNNandOthers" />
+    <SUITE FILE_PATH="coverage/kNN_and_others$adaptKnn.coverage" NAME="adaptKnn Coverage Results" MODIFIED="1527800835389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kNNandOthers" />
+    <SUITE FILE_PATH="coverage/kNN_and_others$Knn_and_others.coverage" NAME="Knn_and_others Coverage Results" MODIFIED="1530714825668" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/kNNandOthers" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -35,13 +31,50 @@
     <expand />
     <select />
   </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1298825470">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="1276" />
+          <entry key="txt" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="3" />
+          <entry key="Python" value="1276" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="csv" value="2" />
+          <entry key="py" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSV" value="2" />
+          <entry key="Python" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Knn_and_others.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1900">
-              <caret line="227" column="24" selection-start-line="227" selection-start-column="24" selection-end-line="227" selection-end-column="24" />
+            <state relative-caret-position="225">
+              <caret line="251" selection-start-line="251" selection-end-line="254" />
               <folding>
                 <element signature="e#53#63#0" expanded="true" />
               </folding>
@@ -49,41 +82,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Knn_and_othersV2.py" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_othersV2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="248" column="14" selection-start-line="248" selection-start-column="14" selection-end-line="248" selection-end-column="14" />
+            <state relative-caret-position="68">
+              <caret line="264" column="24" selection-start-line="264" selection-start-column="24" selection-end-line="264" selection-end-column="24" />
               <folding>
                 <element signature="e#53#63#0" expanded="true" />
+                <element signature="e#833#952#0" />
+                <element signature="e#1006#1365#0" />
+                <element signature="e#1399#1730#0" />
+                <element signature="e#1775#1941#0" />
+                <element signature="e#2085#2898#0" />
+                <element signature="e#3041#3468#0" />
+                <element signature="e#3550#4197#0" />
+                <marker date="1532572858869" expanded="true" signature="8524:8798" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="plot.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/kNNandOthers/plot.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cell.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kNNandOthers/cell.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="2000" selection-start-line="2000" selection-end-line="2000" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="cell0.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kNNandOthers/cell0.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305983">
-              <caret line="17999" column="25" selection-start-line="17999" selection-start-column="25" selection-end-line="17999" selection-end-column="25" />
+            <state relative-caret-position="187">
+              <caret line="11" column="36" lean-forward="true" selection-start-line="11" selection-start-column="36" selection-end-line="12" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -121,8 +144,10 @@
         <option value="$PROJECT_DIR$/kNNandOthers/cell0" />
         <option value="$PROJECT_DIR$/kNNandOthers/Knn_and_others.py" />
         <option value="$PROJECT_DIR$/kNNandOthers/cell0.csv" />
-        <option value="$PROJECT_DIR$/kNNandOthers/Knn_and_othersV2.py" />
+        <option value="$PROJECT_DIR$/kNNandOthers/tests.py" />
+        <option value="$PROJECT_DIR$/kNNandOthers/allData.csv" />
         <option value="$PROJECT_DIR$/kNNandOthers/plot.py" />
+        <option value="$PROJECT_DIR$/kNNandOthers/Knn_and_othersV2.py" />
       </list>
     </option>
   </component>
@@ -132,12 +157,9 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="142" />
-    <option name="y" value="287" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1685" />
+    <option name="y" value="-25" />
     <option name="width" value="810" />
     <option name="height" value="505" />
   </component>
@@ -146,7 +168,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -163,6 +184,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -191,7 +213,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.plot">
+  <component name="RunManager" selected="Python.Knn_and_othersV2">
     <configuration name="Knn_and_others" type="PythonConfigurationType" factoryName="Python">
       <module name="kNN_and_others" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -210,6 +232,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="Knn_and_othersV2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kNN_and_others" />
@@ -229,6 +254,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="adaptKnn" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kNN_and_others" />
@@ -248,6 +276,9 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="plot" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="kNN_and_others" />
@@ -267,17 +298,44 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tests" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="kNN_and_others" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kNNandOthers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kNNandOthers/tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Python.Knn_and_others" />
       <item itemvalue="Python.adaptKnn" />
       <item itemvalue="Python.Knn_and_othersV2" />
       <item itemvalue="Python.plot" />
+      <item itemvalue="Python.tests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.plot" />
         <item itemvalue="Python.Knn_and_othersV2" />
+        <item itemvalue="Python.tests" />
+        <item itemvalue="Python.plot" />
         <item itemvalue="Python.adaptKnn" />
       </list>
     </recent_temporary>
@@ -295,60 +353,68 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="-6" width="1549" height="837" extended-state="7" />
-    <editor active="true" />
+    <frame x="-6" y="-6" width="1549" height="837" extended-state="6" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50033534" side_tool="true" weight="0.42313117" />
-      <window_info anchor="right" x="0" y="0" width="337" height="637" id="Documentation" order="7" sideWeight="0.5110024" side_tool="true" weight="0.41784036" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32863188" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49966466" weight="0.32863188" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49966466" weight="0.42313117" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32863188" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14017437" />
-      <window_info anchor="right" id="R Packages" order="3" weight="0.3293092" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14218645" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3281471" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49899396" weight="0.50777936" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39915374" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32956153" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.501006" side_tool="true" weight="0.50777936" />
+      <window_info anchor="bottom" id="Version Control" order="10" weight="0.32863188" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3281471" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49966466" weight="0.3281471" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Packages" order="3" weight="0.3293092" />
       <window_info anchor="right" id="R Graphics" order="4" weight="0.3293092" />
       <window_info anchor="right" id="Database" order="5" weight="0.3293092" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32863188" />
-      <window_info anchor="right" id="SciView" order="6" sideWeight="0.48899755" weight="0.41582832" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39915374" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="6" sideWeight="0.48739496" visible="true" weight="0.41582832" />
+      <window_info anchor="right" x="0" y="0" width="337" height="637" id="Documentation" order="7" sideWeight="0.5126051" side_tool="true" weight="0.41582832" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32863188" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.043723553" />
-      <window_info id="Favorites" order="2" side_tool="true" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18712273" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="R Graphics" order="4" weight="0.3293092" />
-      <window_info anchor="right" id="R Packages" order="3" weight="0.3293092" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32863188" />
-      <window_info anchor="right" x="0" y="0" width="238" height="374" id="Documentation" order="7" sideWeight="0.50840336" side_tool="true" visible="true" weight="0.24144869" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.043723553" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32863188" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32863188" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50033534" side_tool="true" weight="0.32863188" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="6" sideWeight="0.49159664" weight="0.3936955" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" id="Database" order="5" weight="0.32997987" />
       <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49966466" weight="0.32863188" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="R Packages" order="3" weight="0.3293092" />
+      <window_info anchor="right" id="R Graphics" order="4" weight="0.3293092" />
+      <window_info anchor="right" id="Database" order="5" weight="0.32997987" />
+      <window_info anchor="right" id="SciView" order="6" sideWeight="0.49159664" weight="0.3936955" />
+      <window_info anchor="right" x="0" y="0" width="238" height="374" id="Documentation" order="7" sideWeight="0.50840336" side_tool="true" visible="true" weight="0.24144869" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,146 +423,7 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="17" />
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/redwine.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27183">
-          <caret line="1599" selection-start-line="1599" selection-end-line="1599" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/iris.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3774">
-          <caret line="227" column="28" lean-forward="true" selection-start-line="227" selection-start-column="28" selection-end-line="227" selection-end-column="28" />
-          <folding>
-            <element signature="e#53#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/redwine.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27183">
-          <caret line="1599" selection-start-line="1599" selection-end-line="1599" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/iris.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#53#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/redwine.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27183">
-          <caret line="1599" selection-start-line="1599" selection-end-line="1599" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/iris.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2074">
-          <caret line="122" column="4" selection-start-line="122" selection-start-column="4" selection-end-line="122" selection-end-column="4" />
-          <folding>
-            <element signature="e#53#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/redwine.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27183">
-          <caret line="1599" selection-start-line="1599" selection-end-line="1599" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/iris.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="70" selection-start-line="40" selection-start-column="70" selection-end-line="40" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/redwine.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27183">
-          <caret line="1599" selection-start-line="1599" selection-end-line="1599" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/iris.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2261">
-          <caret line="133" column="26" lean-forward="true" selection-start-line="133" selection-start-column="26" selection-end-line="133" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/redwine.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27183">
-          <caret line="1599" selection-start-line="1599" selection-end-line="1599" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/iris.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2142">
-          <caret line="129" column="24" selection-start-line="129" selection-start-column="24" selection-end-line="129" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/iris.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/redwine.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27183">
-          <caret line="1599" lean-forward="true" selection-start-line="1599" selection-end-line="1599" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2227">
-          <caret line="134" column="9" selection-start-line="134" selection-start-column="9" selection-end-line="134" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/iris.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/kNNandOthers/skin.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -529,13 +456,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kNNandOthers/execute" />
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/cell1.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="25" lean-forward="true" selection-end-line="2000" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kNNandOthers/forestfire.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -593,9 +513,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kNNandOthers/cell0" />
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/cell9.csv">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/matplotlib/pyplot.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -624,20 +541,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/cell.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="2000" selection-start-line="2000" selection-end-line="2000" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/cell0.csv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305983">
-          <caret line="17999" column="25" selection-start-line="17999" selection-start-column="25" selection-end-line="17999" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/matplotlib/axes/_axes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -645,35 +548,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/kNNandOthers/graph.png" />
+    <entry file="file://$PROJECT_DIR$/kNNandOthers/filename.png" />
+    <entry file="file://$PROJECT_DIR$/kNNandOthers/grafico.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kNNandOthers/cell1.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kNNandOthers/cell0.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34000">
+          <caret line="2000" selection-start-line="2000" selection-end-line="2000" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kNNandOthers/cell9.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-33722" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kNNandOthers/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_others.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1900">
-          <caret line="227" column="24" selection-start-line="227" selection-start-column="24" selection-end-line="227" selection-end-column="24" />
+        <state relative-caret-position="225">
+          <caret line="251" selection-start-line="251" selection-end-line="254" />
           <folding>
             <element signature="e#53#63#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/graph.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/kNNandOthers/filename.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/kNNandOthers/plot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
+        <state relative-caret-position="187">
+          <caret line="11" column="36" lean-forward="true" selection-start-line="11" selection-start-column="36" selection-end-line="12" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kNNandOthers/allData.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="459" column="18" lean-forward="true" selection-start-line="459" selection-start-column="18" selection-end-line="459" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kNNandOthers/Knn_and_othersV2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="248" column="14" selection-start-line="248" selection-start-column="14" selection-end-line="248" selection-end-column="14" />
+        <state relative-caret-position="68">
+          <caret line="264" column="24" selection-start-line="264" selection-start-column="24" selection-end-line="264" selection-end-column="24" />
           <folding>
             <element signature="e#53#63#0" expanded="true" />
+            <element signature="e#833#952#0" />
+            <element signature="e#1006#1365#0" />
+            <element signature="e#1399#1730#0" />
+            <element signature="e#1775#1941#0" />
+            <element signature="e#2085#2898#0" />
+            <element signature="e#3041#3468#0" />
+            <element signature="e#3550#4197#0" />
+            <marker date="1532572858869" expanded="true" signature="8524:8798" ph="..." />
           </folding>
         </state>
       </provider>

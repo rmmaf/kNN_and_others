@@ -290,7 +290,7 @@ def main():
 
     count = 10
 
-    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 0, 0.67, "cell.csv", 2, 7)
+    result = repeat(eixoX, eixoYA, eixoYK, eixoYW, count, 0, 0.67, "cell0.csv", 2, 7)
     eixoX = g0(result)
     eixoYA = g1(result)
     eixoYK = g2(result)
