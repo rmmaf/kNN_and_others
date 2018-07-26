@@ -1,29 +1,26 @@
 # Example of kNN implemented from Scratch in Python
 
 import csv
-import random
 import math
 import operator
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.model_selection import KFold
+from numpy import array
 
+def toFloat(array):
+    for x in range(len(array)):
+        array[x] = float(array[x])
 
-
-def loadDataset(filename1, filename2, quantity, trainingSet=[], testSet=[]):
-    with open(filename1, 'rU') as csvfile:
+def loadDataset(filename, quantity, dataArray=[]):# "transforma" o csv num array
+    with open(filename, 'rU') as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
         for x in range(len(dataset) - 1):
             for y in range(quantity):#deixar como float os valores do data set para poder calcula-los
                 dataset[x][y] = float(dataset[x][y])
-            trainingSet.append(dataset[x])
-    with open(filename2, 'rU') as csvfile:
-        lines = csv.reader(csvfile)
-        dataset = list(lines)
-        for x in range(len(dataset) - 1):
-            for y in range(quantity):  # deixar como float os valores do data set para poder calcula-los
-                dataset[x][y] = float(dataset[x][y])
-            testSet.append(dataset[x])
+                toFloat(dataset[x])
+            dataArray.append(dataset[x])
 
 def euclideanDistance(instance1, instance2, length):
     distance = 0
@@ -138,11 +135,8 @@ def getkDN(trainingSet, testInstance, k):
             count = count + 1
     return float(float(count)/float(k))
 
-def newEtcNN(filename1, filename2, quantity, k):
+def newEtcNN(trainingSet, testSet, k):
     # prepare data
-    trainingSet = []
-    testSet = []
-    loadDataset(filename1, filename2, quantity, trainingSet, testSet)
     print 'Training set: ' + repr(len(trainingSet))
     print 'Test set: ' + repr(len(testSet))
     #calculo KDN
@@ -235,18 +229,7 @@ def newEtcNN(filename1, filename2, quantity, k):
         eixoYW.append(float(acertosW / contagem) * 100.0)
         eixoYA.append(float(acertosA / contagem) * 100.0)
         count = count + fatorSoma
-    count = 0.0
-    kdnDeviation = []
-    print mediaGeralKdn
-    while count < 1.0:
-        aux = []
-        for x in range(len(testSetKDN)):
-            if (count <= testSetKDN[x] < (count + fatorSoma)):
-                aux.append(float((testSetKDN[x] - float(mediaGeralKdn)) ** 2.0))
-        if len(aux) != 0:
-            kdnDeviation.append(float((sum(aux) / len(aux)) ** 0.5))
-        count = count + fatorSoma
-    return eixoX, eixoYA, eixoYK, eixoYW, kdnDeviation
+    return eixoX, eixoYA, eixoYK, eixoYW
 
 def listSum(list1, list2):
     if len(list1) == len(list2):
@@ -256,49 +239,91 @@ def listSum(list1, list2):
         return listAux
     else:
         return 0
+def arraySum(array1, array2, arrayResult):
+    for y in range(len(array1)):
+        arrayResult[y] = (array1[y] + array2[y])
 
-def toFloat(array):
-    for x in range(len(array)):
-        array[x] = float(array[x])
+def divideList (list, factor):
+    for x in range(len(list)):
+        list[x] = list[x]/factor
+
+def potList (list, factor):
+    for x in range(len(list)):
+        list[x] = list[x]**factor
+
 def main():
     eixoX = []
     eixoYA = []
     eixoYK = []
     eixoYW = []
-    desvio = []
-    g0 = operator.itemgetter(0)
-    g1 = operator.itemgetter(1)
-    g2 = operator.itemgetter(2)
-    g3 = operator.itemgetter(3)
-    g4 = operator.itemgetter(4)
-    result = newEtcNN("cell0.csv", "cell9.csv", 2, 7)
-    desvio = g4(result)
-    if not eixoX:
-        eixoX = g0(result)
-        eixoYA = g1(result)
-        eixoYK = g2(result)
-        eixoYW = g3(result)
-    else:
-        eixoX = listSum(eixoX, g0(result))
-        eixoYA = listSum(eixoYA, g1(result))
-        eixoYK = listSum(eixoYK, g2(result))
-        eixoYW = listSum(eixoYW, g3(result))
-    toFloat(eixoYW)
-    toFloat(eixoYA)
-    toFloat(eixoYK)
+    desvioA = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    desvioK = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    desvioW = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    arrayResultado = []
+    dataArray = []
 
-    eixoYK.pop()
+    loadDataset('cell1.csv', 2, dataArray) #colocar todos os dados num unico array
+    dataArray = array(dataArray)
+    # data sample
+    # prepare cross validation
+    kfold = KFold(3, True, 1)
+    # enumerate splits
+    for train, test in kfold.split(dataArray):
+        arrayResultado.append(newEtcNN(dataArray[train], dataArray[test], 7))
+    #inicio codigo para obter a media dos testes
+    for x in range(len(arrayResultado) - 1):
+        if not eixoX:# para a primeira busca
+            eixoX = arrayResultado[0][0]
+            eixoYA = arrayResultado[0][1]
+            eixoYK = arrayResultado[0][2]
+            eixoYW = arrayResultado[0][3]
+
+            arraySum(eixoYA, arrayResultado[x + 1][1], eixoYA)
+            arraySum(eixoYK, arrayResultado[x + 1][2], eixoYK)
+            arraySum(eixoYW, arrayResultado[x + 1][3], eixoYW)
+        else:
+            arraySum(eixoYA, arrayResultado[x + 1][1], eixoYA)
+            arraySum(eixoYK, arrayResultado[x + 1][2], eixoYK)
+            arraySum(eixoYW, arrayResultado[x + 1][3], eixoYW)
+    divideList(eixoYA, 3.0)
+    divideList(eixoYW, 3.0)
+    divideList(eixoYK, 3.0)
+    #fim codigo da media
     eixoYA.pop()
     eixoYW.pop()
+    eixoYK.pop()
     eixoX.pop()
-    print desvio
-    print eixoYK
+    #inicio codigo desvio padrao
+    for x in range(len(eixoX)):
+        for y in range(len(arrayResultado)):
+            desvioA[x] = desvioA[x] + (arrayResultado[y][1][x] - eixoYA[x])**2.0
+            desvioK[x] = desvioK[x] + (arrayResultado[y][2][x] - eixoYK[x])**2.0
+            desvioW[x] = desvioW[x] + (arrayResultado[y][3][x] - eixoYW[x]) ** 2.0
+    divideList(desvioA, 3.0)
+    divideList(desvioW, 3.0)
+    divideList(desvioK, 3.0)
+    potList(desvioA, 0.5)
+    potList(desvioW, 0.5)
+    potList(desvioK, 0.5)
+    #fim codigo desvio padrao
+    print "eixoYAnn: "
     print eixoYA
+    print 'eixoYWnn: '
     print eixoYW
+    print "eixoYKnn: "
+    print eixoYK
+    print "eixoX: "
     print eixoX
-    plt.errorbar(eixoX, eixoYA, desvio)
-    plt.errorbar(eixoX, eixoYK, desvio)
-    plt.errorbar(eixoX, eixoYW, desvio)
+    print 'desvioAnn: '
+    print desvioA
+    print 'desvioWnn: '
+    print desvioW
+    print 'desvioKnn: '
+    print desvioK
+
+    plt.errorbar(eixoX, eixoYA, desvioA)
+    plt.errorbar(eixoX, eixoYK, desvioK)
+    plt.errorbar(eixoX, eixoYW, desvioW)
 
     plt.axis([0.00, 1.00, 0.00, 100.00])
     plt.show()
