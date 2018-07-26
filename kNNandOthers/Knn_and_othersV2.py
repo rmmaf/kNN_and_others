@@ -262,11 +262,11 @@ def main():
     arrayResultado = []
     dataArray = []
 
-    loadDataset('cell1.csv', 2, dataArray) #colocar todos os dados num unico array
+    loadDataset('allData.csv', 2, dataArray) #colocar todos os dados num unico array
     dataArray = array(dataArray)
     # data sample
     # prepare cross validation
-    kfold = KFold(3, True, 1)
+    kfold = KFold(10, True, 1)
     # enumerate splits
     for train, test in kfold.split(dataArray):
         arrayResultado.append(newEtcNN(dataArray[train], dataArray[test], 7))
@@ -285,9 +285,9 @@ def main():
             arraySum(eixoYA, arrayResultado[x + 1][1], eixoYA)
             arraySum(eixoYK, arrayResultado[x + 1][2], eixoYK)
             arraySum(eixoYW, arrayResultado[x + 1][3], eixoYW)
-    divideList(eixoYA, 3.0)
-    divideList(eixoYW, 3.0)
-    divideList(eixoYK, 3.0)
+    divideList(eixoYA, 10.0)
+    divideList(eixoYW, 10.0)
+    divideList(eixoYK, 10.0)
     #fim codigo da media
     eixoYA.pop()
     eixoYW.pop()
@@ -299,9 +299,9 @@ def main():
             desvioA[x] = desvioA[x] + (arrayResultado[y][1][x] - eixoYA[x])**2.0
             desvioK[x] = desvioK[x] + (arrayResultado[y][2][x] - eixoYK[x])**2.0
             desvioW[x] = desvioW[x] + (arrayResultado[y][3][x] - eixoYW[x]) ** 2.0
-    divideList(desvioA, 3.0)
-    divideList(desvioW, 3.0)
-    divideList(desvioK, 3.0)
+    divideList(desvioA, 10.0)
+    divideList(desvioW, 10.0)
+    divideList(desvioK, 10.0)
     potList(desvioA, 0.5)
     potList(desvioW, 0.5)
     potList(desvioK, 0.5)
@@ -326,6 +326,7 @@ def main():
     plt.errorbar(eixoX, eixoYW, desvioW)
 
     plt.axis([0.00, 1.00, 0.00, 100.00])
+    plt.savefig('grafico.pdf', dpi=600)
     plt.show()
 
 main()
