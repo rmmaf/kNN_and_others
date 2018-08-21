@@ -4,9 +4,9 @@ import csv
 import math
 import operator
 import matplotlib.pyplot as plt
-import numpy as np
 from sklearn.model_selection import KFold
 from numpy import array
+import numpy as np
 from sklearn.neighbors import KDTree
 
 def toFloat(array):
@@ -66,7 +66,8 @@ def getAccuracy(testSet, predictions):
     return (correct / float(len(testSet))) * 100.0
 
 #implementacao do a-NN
-def getSphereRadius(trainingSet, trainingInstance, e):#classe para pegar o raio da instancia do conjunto de treino
+#classe para pegar o raio da instancia do conjunto de treino
+def getSphereRadius(trainingSet, trainingInstance, e):
     radius = 1
     distances = []
     length = len(trainingInstance) - 1
@@ -84,8 +85,8 @@ def getSphereRadius(trainingSet, trainingInstance, e):#classe para pegar o raio 
             radius = f1(distances[x])
             break
     return radius - e
-
-def getNeighborsWithRadius(trainingSet, testInstance, k, radius):#classe para pegar os vizinhos mais proximos baseando-se na nova medida
+#classe para pegar os vizinhos mais proximos baseando-se na nova medida
+def getNeighborsWithRadius(trainingSet, testInstance, k, radius):
     distances = []
     length = len(testInstance) - 1
     for x in range(len(trainingSet)):
@@ -98,6 +99,7 @@ def getNeighborsWithRadius(trainingSet, testInstance, k, radius):#classe para pe
     for x in range(k):
         neighbors.append(distances[x][0])
     return neighbors
+
 #distance weighted k-NN
 
 def getResponseWithWeight(neighbors, testInstance):
@@ -168,7 +170,7 @@ def naturalNeighbor(trainingSet):
                     naNum[vizinhos[y]] = naNum[vizinhos[y]] + 1
         cnt.append(naNum.count(0))
         rep = float(cnt.count(naNum.count(0)) - 1)
-        if naNum.count(0) == 0:
+        if naNum.count(0) == 0 & (rep >= (float(r) - rep)**0.5):
             flag = 1
         r = r + 1
     naNE = r - 1
@@ -197,6 +199,7 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosKnn.append(False)
     accuracy = getAccuracy(testSet, predictions)
+    mediaK = accuracy
     print('Accuracy kNN: ' + repr(accuracy) + '%')
 
     print 'NaN'
@@ -214,6 +217,7 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosNaN.append(False)
     accuracy = getAccuracy(testSet, predictions)
+    mediaNk = accuracy
     print('Accuracy NaN: ' + repr(accuracy) + '%')
 
 
@@ -233,6 +237,7 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosAnn.append(False)
     accuracy = getAccuracy(testSet, predictions)
+    mediaA = accuracy
     print('Accuracy aNN: ' + repr(accuracy) + '%')
 
     print 'NaNaNN'
@@ -251,6 +256,7 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosNaNAnn.append(False)
     accuracy = getAccuracy(testSet, predictions)
+    mediaNa = accuracy
     print('Accuracy NaNaNN: ' + repr(accuracy) + '%')
 
     # w-NN
@@ -266,6 +272,7 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosWnn.append(False)
     accuracy = getAccuracy(testSet, predictions)
+    mediaW = accuracy
     print('Accuracy WNN: ' + repr(accuracy) + '%')
 
     # w-NN
@@ -281,8 +288,10 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosNaNWnn.append(False)
     accuracy = getAccuracy(testSet, predictions)
+    mediaNw = accuracy
     print('Accuracy NaN WNN: ' + repr(accuracy) + '%')
 
+    #parte para plotagem
     fatorSoma = float(1.0/float(k))
     count = float(0.0)
     eixoYK = []
@@ -292,7 +301,6 @@ def newEtcNN(trainingSet, testSet, k):
     eixoYNA = []
     eixoYNW = []
     eixoX = []
-    #kdnMean = []
     while count < 1.0:
         acertosK = 0.0
         acertosW = 0.0
@@ -300,7 +308,7 @@ def newEtcNN(trainingSet, testSet, k):
         acertosN = 0.0
         acertosNA = 0.0
         acertosNW = 0.0
-        #mediaKdn = []
+
         contagem = 0.0
         for x in range(len(testSetKDN)):
             if (count <= testSetKDN[x] < (count + fatorSoma)):
@@ -327,7 +335,7 @@ def newEtcNN(trainingSet, testSet, k):
         eixoYNA.append(float(acertosNA / contagem) * 100.0)
         eixoYNW.append(float(acertosNW / contagem) * 100.0)
         count = count + fatorSoma
-    return eixoX, eixoYA, eixoYK, eixoYW, eixoYN, eixoYNA, eixoYNW
+    return eixoX, eixoYA, eixoYK, eixoYW, eixoYN, eixoYNA, eixoYNW, mediaK, mediaA, mediaW, mediaNk, mediaNa, mediaNw
 
 def listSum(list1, list2):
     if len(list1) == len(list2):
@@ -356,6 +364,7 @@ def main(file, k, qtd , fold, exportName):
     eixoYN = []
     eixoYNA = []
     eixoYNW = []
+    arrayZero = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     desvioA = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     desvioK = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     desvioW = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -365,6 +374,13 @@ def main(file, k, qtd , fold, exportName):
     arrayResultado = []
     dataArray = []
 
+    mediaK = []
+    mediaA = []
+    mediaW = []
+    mediaNk = []
+    mediaNa = []
+    mediaNw = []
+
     loadDataset(file, qtd, dataArray) #colocar todos os dados num unico array
     dataArray = array(dataArray)
     # data sample
@@ -373,6 +389,12 @@ def main(file, k, qtd , fold, exportName):
     # enumerate splits
     for train, test in kfold.split(dataArray):
         arrayResultado.append(newEtcNN(dataArray[train], dataArray[test], k))
+        mediaK.append(arrayResultado[-1][7])
+        mediaA.append(arrayResultado[-1][8])
+        mediaW.append(arrayResultado[-1][9])
+        mediaNk.append(arrayResultado[-1][10])
+        mediaNa.append(arrayResultado[-1][11])
+        mediaNw.append(arrayResultado[-1][12])
     #inicio codigo para obter a media dos testes
     for x in range(len(arrayResultado) - 1):
         if not eixoX:# para a primeira busca
@@ -450,17 +472,23 @@ def main(file, k, qtd , fold, exportName):
     print "desvioNaNKnn: " + str(desvioN)
     print  "desvioNaNAnn: " + str(desvioNA)
     print  "desvioNaNWnn: " + str(desvioNW)
+    print "media Knn: " + str(np.mean(mediaK))
+    print "media Ann: " + str(np.mean(mediaA))
+    print "media Wnn: " + str(np.mean(mediaW))
+    print "media Nk: " + str(np.mean(mediaNk))
+    print "media Na: " + str(np.mean(mediaNa))
+    print "media Nw: " + str(np.mean(mediaNw))
 
 
-    plt.errorbar(eixoX, eixoYA, desvioA)
-    plt.errorbar(eixoX, eixoYK, desvioK)
-    plt.errorbar(eixoX, eixoYW, desvioW)
-    plt.errorbar(eixoX, eixoYN, desvioN)
-    plt.errorbar(eixoX, eixoYNA, desvioNA)
-    plt.errorbar(eixoX, eixoYNW, desvioNW)
+    plt.errorbar(eixoX, eixoYA, arrayZero)
+    plt.errorbar(eixoX, eixoYK, arrayZero)
+    plt.errorbar(eixoX, eixoYW, arrayZero)
+    plt.errorbar(eixoX, eixoYN, arrayZero)
+    plt.errorbar(eixoX, eixoYNA, arrayZero)
+    plt.errorbar(eixoX, eixoYNW, arrayZero)
 
     plt.axis([0.00, 1.00, 0.00, 100.00])
     plt.savefig(exportName, dpi=600)
     plt.show()
 
-main("sonar.csv", 7, 60, 10, "sonar.pdf")
+main("iris.csv", 7, 4, 10, "iris.pdf")
