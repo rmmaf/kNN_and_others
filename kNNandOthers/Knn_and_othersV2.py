@@ -4,9 +4,10 @@ import csv
 import math
 import operator
 import matplotlib.pyplot as plt
-import numpy as np
 from sklearn.model_selection import KFold
 from numpy import array
+import numpy as np
+from sklearn.neighbors import KDTree
 
 def toFloat(array):
     for x in range(len(array)):
@@ -65,7 +66,8 @@ def getAccuracy(testSet, predictions):
     return (correct / float(len(testSet))) * 100.0
 
 #implementacao do a-NN
-def getSphereRadius(trainingSet, trainingInstance, e):#classe para pegar o raio da instancia do conjunto de treino
+#classe para pegar o raio da instancia do conjunto de treino
+def getSphereRadius(trainingSet, trainingInstance, e):
     radius = 1
     distances = []
     length = len(trainingInstance) - 1
@@ -83,8 +85,8 @@ def getSphereRadius(trainingSet, trainingInstance, e):#classe para pegar o raio 
             radius = f1(distances[x])
             break
     return radius - e
-
-def getNeighborsWithRadius(trainingSet, testInstance, k, radius):#classe para pegar os vizinhos mais proximos baseando-se na nova medida
+#classe para pegar os vizinhos mais proximos baseando-se na nova medida
+def getNeighborsWithRadius(trainingSet, testInstance, k, radius):
     distances = []
     length = len(testInstance) - 1
     for x in range(len(trainingSet)):
@@ -97,6 +99,7 @@ def getNeighborsWithRadius(trainingSet, testInstance, k, radius):#classe para pe
     for x in range(k):
         neighbors.append(distances[x][0])
     return neighbors
+
 #distance weighted k-NN
 
 def getResponseWithWeight(neighbors, testInstance):
@@ -135,6 +138,44 @@ def getkDN(trainingSet, testInstance, k):
             count = count + 1
     return float(float(count)/float(k))
 
+def KNNr(tree, data, indice, r):
+    dist, ind = tree.query([data[indice]], k=r)  # consulta a arvore, distancia e indice dos pontos mais proximos
+    lista = []
+    for x in range(len(ind[0])):
+        if(x != 0):
+            lista.append(ind[0][x])
+    lista = array(lista)
+    return lista
+
+def naturalNeighbor(trainingSet):
+    newTrainingSet = trainingSet
+    r = 1
+    flag = 0
+    naN_Edge = set()
+    tree = KDTree(newTrainingSet, leaf_size=2) #implementacao da arvore kd do trainingSet
+    naNum = []
+    for x in range(len(newTrainingSet)):#setando o NaNum para zero em todas as instancias do trainning set
+        naNum.append(0)
+    cnt = []
+    while flag == 0:
+        for x in range(len(newTrainingSet)):
+            vizinhos = KNNr(tree, newTrainingSet, x, r + 1)
+            for y in range(len(vizinhos)):
+                otherKnn = KNNr(tree, newTrainingSet, vizinhos[y], r)
+                auxSet = set(otherKnn)
+                auxSet.add(x)
+                if x in set(otherKnn) & auxSet not in naN_Edge:
+                    naN_Edge.union(auxSet)
+                    naNum[x] = naNum[x] + 1
+                    naNum[vizinhos[y]] = naNum[vizinhos[y]] + 1
+        cnt.append(naNum.count(0))
+        rep = float(cnt.count(naNum.count(0)) - 1)
+        if naNum.count(0) == 0 & (rep >= (float(r) - rep)**0.5):
+            flag = 1
+        r = r + 1
+    naNE = r - 1
+    return naNE
+
 def newEtcNN(trainingSet, testSet, k):
     # prepare data
     print 'Training set: ' + repr(len(trainingSet))
@@ -144,7 +185,6 @@ def newEtcNN(trainingSet, testSet, k):
     for x in range(len(testSet)):
         testSetKDN.append(getkDN(trainingSet, testSet[x], k))
     #media GeralKDN
-    mediaGeralKdn = np.mean(testSetKDN)
 
     print 'kNN'
     # generate predictions
@@ -159,9 +199,27 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosKnn.append(False)
     accuracy = getAccuracy(testSet, predictions)
+    mediaK = accuracy
     print('Accuracy kNN: ' + repr(accuracy) + '%')
-    accuracyKNN = repr(accuracy)
-    accuracyKNNNumber = accuracy
+
+    print 'NaN'
+    # generate predictions
+    predictions = []
+    acertosNaN = []
+    naturalK = naturalNeighbor(trainingSet)
+    print "Natural K: " + str(naturalK)
+    for x in range(len(testSet)):
+        neighbors = getNeighbors(trainingSet, testSet[x], naturalK)
+        result = getResponse(neighbors)
+        predictions.append(result)
+        if result == testSet[x][-1]:
+            acertosNaN.append(True)
+        else:
+            acertosNaN.append(False)
+    accuracy = getAccuracy(testSet, predictions)
+    mediaNk = accuracy
+    print('Accuracy NaN: ' + repr(accuracy) + '%')
+
 
     print 'aNN'
     radiusOfTrainingSet = []
@@ -179,9 +237,27 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosAnn.append(False)
     accuracy = getAccuracy(testSet, predictions)
+    mediaA = accuracy
     print('Accuracy aNN: ' + repr(accuracy) + '%')
-    accuracyANN = repr(accuracy)
-    accuracyANNNumber = accuracy
+
+    print 'NaNaNN'
+    radiusOfTrainingSet = []
+    for x in range(len(trainingSet)):
+        radius = getSphereRadius(trainingSet, trainingSet[x], 0.0)
+        radiusOfTrainingSet.append(radius)
+    predictions = []
+    acertosNaNAnn = []
+    for x in range(len(testSet)):
+        neighbors = getNeighborsWithRadius(trainingSet, testSet[x], naturalK, radiusOfTrainingSet)
+        result = getResponse(neighbors)
+        predictions.append(result)
+        if result == testSet[x][-1]:
+            acertosNaNAnn.append(True)
+        else:
+            acertosNaNAnn.append(False)
+    accuracy = getAccuracy(testSet, predictions)
+    mediaNa = accuracy
+    print('Accuracy NaNaNN: ' + repr(accuracy) + '%')
 
     # w-NN
     print 'w-NN'
@@ -196,22 +272,43 @@ def newEtcNN(trainingSet, testSet, k):
         else:
             acertosWnn.append(False)
     accuracy = getAccuracy(testSet, predictions)
-    accuracyWNN = repr(accuracy)
-    accuracyWNNNumber = accuracy
+    mediaW = accuracy
     print('Accuracy WNN: ' + repr(accuracy) + '%')
 
+    # w-NN
+    print 'NaN w-NN'
+    predictions = []
+    acertosNaNWnn = []
+    for x in range(len(testSet)):
+        neighbors = getNeighbors(trainingSet, testSet[x], naturalK)
+        result = getResponseWithWeight(neighbors, testSet[x])
+        predictions.append(result)
+        if result == testSet[x][-1]:
+            acertosNaNWnn.append(True)
+        else:
+            acertosNaNWnn.append(False)
+    accuracy = getAccuracy(testSet, predictions)
+    mediaNw = accuracy
+    print('Accuracy NaN WNN: ' + repr(accuracy) + '%')
+
+    #parte para plotagem
     fatorSoma = float(1.0/float(k))
     count = float(0.0)
     eixoYK = []
     eixoYW = []
     eixoYA = []
+    eixoYN = []
+    eixoYNA = []
+    eixoYNW = []
     eixoX = []
-    #kdnMean = []
     while count < 1.0:
         acertosK = 0.0
         acertosW = 0.0
         acertosA = 0.0
-        #mediaKdn = []
+        acertosN = 0.0
+        acertosNA = 0.0
+        acertosNW = 0.0
+
         contagem = 0.0
         for x in range(len(testSetKDN)):
             if (count <= testSetKDN[x] < (count + fatorSoma)):
@@ -221,6 +318,12 @@ def newEtcNN(trainingSet, testSet, k):
                     acertosW = acertosW + 1.0
                 if (acertosAnn[x]):
                     acertosA = acertosA + 1.0
+                if (acertosNaN[x]):
+                    acertosN = acertosN + 1.0
+                if (acertosNaNAnn[x]):
+                    acertosNA = acertosNA + 1.0
+                if (acertosNaNWnn[x]):
+                    acertosNW = acertosNW + 1.0
                 contagem = contagem + 1.0
         if contagem == 0.0:
             contagem = 1.0
@@ -228,8 +331,11 @@ def newEtcNN(trainingSet, testSet, k):
         eixoYK.append(float(acertosK / contagem) * 100.0)
         eixoYW.append(float(acertosW / contagem) * 100.0)
         eixoYA.append(float(acertosA / contagem) * 100.0)
+        eixoYN.append(float(acertosN / contagem) * 100.0)
+        eixoYNA.append(float(acertosNA / contagem) * 100.0)
+        eixoYNW.append(float(acertosNW / contagem) * 100.0)
         count = count + fatorSoma
-    return eixoX, eixoYA, eixoYK, eixoYW
+    return eixoX, eixoYA, eixoYK, eixoYW, eixoYN, eixoYNA, eixoYNW, mediaK, mediaA, mediaW, mediaNk, mediaNa, mediaNw
 
 def listSum(list1, list2):
     if len(list1) == len(list2):
@@ -250,26 +356,45 @@ def divideList (list, factor):
 def potList (list, factor):
     for x in range(len(list)):
         list[x] = list[x]**factor
-
-def main():
+def main(file, k, qtd , fold, exportName):
     eixoX = []
     eixoYA = []
     eixoYK = []
     eixoYW = []
+    eixoYN = []
+    eixoYNA = []
+    eixoYNW = []
+    arrayZero = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     desvioA = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     desvioK = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     desvioW = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    desvioN = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    desvioNA = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    desvioNW = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
     arrayResultado = []
     dataArray = []
 
-    loadDataset('allData.csv', 2, dataArray) #colocar todos os dados num unico array
+    mediaK = []
+    mediaA = []
+    mediaW = []
+    mediaNk = []
+    mediaNa = []
+    mediaNw = []
+
+    loadDataset(file, qtd, dataArray) #colocar todos os dados num unico array
     dataArray = array(dataArray)
     # data sample
     # prepare cross validation
-    kfold = KFold(10, True, 1)
+    kfold = KFold(fold, True, 1)
     # enumerate splits
     for train, test in kfold.split(dataArray):
-        arrayResultado.append(newEtcNN(dataArray[train], dataArray[test], 7))
+        arrayResultado.append(newEtcNN(dataArray[train], dataArray[test], k))
+        mediaK.append(arrayResultado[-1][7])
+        mediaA.append(arrayResultado[-1][8])
+        mediaW.append(arrayResultado[-1][9])
+        mediaNk.append(arrayResultado[-1][10])
+        mediaNa.append(arrayResultado[-1][11])
+        mediaNw.append(arrayResultado[-1][12])
     #inicio codigo para obter a media dos testes
     for x in range(len(arrayResultado) - 1):
         if not eixoX:# para a primeira busca
@@ -277,56 +402,93 @@ def main():
             eixoYA = arrayResultado[0][1]
             eixoYK = arrayResultado[0][2]
             eixoYW = arrayResultado[0][3]
+            eixoYN = arrayResultado[0][4]
+            eixoYNA = arrayResultado[0][5]
+            eixoYNW = arrayResultado[0][6]
 
             arraySum(eixoYA, arrayResultado[x + 1][1], eixoYA)
             arraySum(eixoYK, arrayResultado[x + 1][2], eixoYK)
             arraySum(eixoYW, arrayResultado[x + 1][3], eixoYW)
+            arraySum(eixoYN, arrayResultado[x + 1][4], eixoYN)
+            arraySum(eixoYNA, arrayResultado[x + 1][5], eixoYNA)
+            arraySum(eixoYNW, arrayResultado[x + 1][6], eixoYNW)
+
         else:
             arraySum(eixoYA, arrayResultado[x + 1][1], eixoYA)
             arraySum(eixoYK, arrayResultado[x + 1][2], eixoYK)
             arraySum(eixoYW, arrayResultado[x + 1][3], eixoYW)
-    divideList(eixoYA, 10.0)
-    divideList(eixoYW, 10.0)
-    divideList(eixoYK, 10.0)
+            arraySum(eixoYN, arrayResultado[x + 1][4], eixoYN)
+            arraySum(eixoYNA, arrayResultado[x + 1][5], eixoYNA)
+            arraySum(eixoYNW, arrayResultado[x + 1][6], eixoYNW)
+
+    divideList(eixoYA, float(fold))
+    divideList(eixoYW, float(fold))
+    divideList(eixoYK, float(fold))
+    divideList(eixoYN, float(fold))
+    divideList(eixoYNA, float(fold))
+    divideList(eixoYNW, float(fold))
     #fim codigo da media
     eixoYA.pop()
     eixoYW.pop()
     eixoYK.pop()
+    eixoYN.pop()
+    eixoYNA.pop()
+    eixoYNW.pop()
     eixoX.pop()
+
+
     #inicio codigo desvio padrao
     for x in range(len(eixoX)):
         for y in range(len(arrayResultado)):
             desvioA[x] = desvioA[x] + (arrayResultado[y][1][x] - eixoYA[x])**2.0
             desvioK[x] = desvioK[x] + (arrayResultado[y][2][x] - eixoYK[x])**2.0
             desvioW[x] = desvioW[x] + (arrayResultado[y][3][x] - eixoYW[x]) ** 2.0
-    divideList(desvioA, 10.0)
-    divideList(desvioW, 10.0)
-    divideList(desvioK, 10.0)
+            desvioN[x] = desvioN[x] + (arrayResultado[y][4][x] - eixoYN[x]) ** 2.0
+            desvioNA[x] = desvioNA[x] + (arrayResultado[y][5][x] - eixoYNA[x]) ** 2.0
+            desvioNW[x] = desvioNW[x] + (arrayResultado[y][6][x] - eixoYNW[x]) ** 2.0
+    divideList(desvioA, float(fold))
+    divideList(desvioW, float(fold))
+    divideList(desvioK, float(fold))
+    divideList(desvioN, float(fold))
+    divideList(desvioNA, float(fold))
+    divideList(desvioNW, float(fold))
     potList(desvioA, 0.5)
     potList(desvioW, 0.5)
     potList(desvioK, 0.5)
+    potList(desvioN, 0.5)
+    potList(desvioNA, 0.5)
+    potList(desvioNW, 0.5)
     #fim codigo desvio padrao
-    print "eixoYAnn: "
-    print eixoYA
-    print 'eixoYWnn: '
-    print eixoYW
-    print "eixoYKnn: "
-    print eixoYK
-    print "eixoX: "
-    print eixoX
-    print 'desvioAnn: '
-    print desvioA
-    print 'desvioWnn: '
-    print desvioW
-    print 'desvioKnn: '
-    print desvioK
+    print "eixoYAnn: " + str(eixoYA)
+    print 'eixoYWnn: ' + str(eixoYW)
+    print "eixoYKnn: " + str(eixoYK)
+    print "eixoYNaNKnn: " + str(eixoYN)
+    print "eixoYNaNAnn: " + str(eixoYNA)
+    print "eixoYNaNWnn: " + str(eixoYNW)
+    print "eixoX: " + str(eixoX)
+    print 'desvioAnn: ' + str(desvioA)
+    print 'desvioWnn: ' + str(desvioW)
+    print 'desvioKnn: ' +  str(desvioK)
+    print "desvioNaNKnn: " + str(desvioN)
+    print  "desvioNaNAnn: " + str(desvioNA)
+    print  "desvioNaNWnn: " + str(desvioNW)
+    print "media Knn: " + str(np.mean(mediaK))
+    print "media Ann: " + str(np.mean(mediaA))
+    print "media Wnn: " + str(np.mean(mediaW))
+    print "media Nk: " + str(np.mean(mediaNk))
+    print "media Na: " + str(np.mean(mediaNa))
+    print "media Nw: " + str(np.mean(mediaNw))
 
-    plt.errorbar(eixoX, eixoYA, desvioA)
-    plt.errorbar(eixoX, eixoYK, desvioK)
-    plt.errorbar(eixoX, eixoYW, desvioW)
+
+    plt.errorbar(eixoX, eixoYA, arrayZero)
+    plt.errorbar(eixoX, eixoYK, arrayZero)
+    plt.errorbar(eixoX, eixoYW, arrayZero)
+    plt.errorbar(eixoX, eixoYN, arrayZero)
+    plt.errorbar(eixoX, eixoYNA, arrayZero)
+    plt.errorbar(eixoX, eixoYNW, arrayZero)
 
     plt.axis([0.00, 1.00, 0.00, 100.00])
-    plt.savefig('grafico.pdf', dpi=600)
+    plt.savefig(exportName, dpi=600)
     plt.show()
 
-main()
+main("iris.csv", 7, 4, 10, "iris.pdf")

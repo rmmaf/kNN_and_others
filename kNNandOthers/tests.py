@@ -1,12 +1,18 @@
-fout=open("allData.csv","a")
-# first file:
-for line in open("cell0.csv"):
-    fout.write(line)
-# now the rest:
-for num in range(2, 10):
-    f = open("cell"+str(num)+".csv")
-    f.next() # skip the header
-    for line in f:
-         fout.write(line)
-    f.close() # not really needed
-fout.close()
+
+import matplotlib.pyplot as plt
+eixoYA = [100.0, 70.0, 63.33333333333333, 42.26190476190476, 29.0, 21.666666666666664, 3.333333333333333]
+eixoYW = [100.0, 70.0, 73.33333333333333, 91.30952380952381, 51.5, 35.0, 0.0]
+eixoYK= [100.0, 70.0, 80.0, 100.0, 19.0, 0.0, 0.0]
+eixoYN= [100.0, 70.0, 80.0, 96.07142857142857, 28.5, 0.0, 0.0]
+eixoX= [0.07142857142857142, 0.21428571428571427, 0.3571428571428571, 0.5, 0.6428571428571428, 0.7857142857142856, 0.9285714285714284]
+desvioA = [0.0, 40.124805295477756, 39.00142447541001, 36.39480616928428, 25.493136331177457, 31.451020121240372, 3.162277660168379]
+desvioW = [0.0, 40.124805295477756, 37.94733192202055, 13.121240418244714, 32.7112366015105, 36.851805322881475, 0.0]
+desvioK = [0.0, 40.124805295477756, 39.496835316262995, 0.0, 18.10800927766495, 0.0, 0.0]
+desvioN= [0.0, 40.124805295477756, 39.496835316262995, 8.119798177847747, 23.74921051319391, 0.0, 0.0]
+
+plt.errorbar(eixoX, eixoYA, desvioA)
+plt.errorbar(eixoX, eixoYK, desvioK)
+plt.errorbar(eixoX, eixoYW, desvioW)
+plt.errorbar(eixoX, eixoYN, desvioN)
+plt.errorbar(eixoX, eixoYNA, desvioNA)
+plt.errorbar(eixoX, eixoYNW, desvioNW)
